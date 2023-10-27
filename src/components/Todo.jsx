@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import Form from "./Form";
 
 export default function Todo() {
-  const [todos, setTodos] = useState(() =>{
-    const storeTodos = JSON.parse(window.localStorage.getItem("todos") || "[]")
+  const [todos, setTodos] = useState(() => {
+    const storeTodos = JSON.parse(window.localStorage.getItem("todos") || "[]");
+    return storeTodos;
   });
   const completedTodo = todos.filter((todo) => todo.done).length;
-  useEffect(() =>{
-   window.localStorage.setItem("todos" , JSON.stringify(todos))
-  },[todos])
+  useEffect(() => {
+    window.localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
   return (
     <>
-      <section className="bg-white flex shadow mb-10">
+      <section className="bg-white flex shadow mb-10 justify-between">
         <div className="flex flex-col px-4 py-8 text-center">
           <dt className="order-last text-lg font-medium text-gray-500">
             Your todos
