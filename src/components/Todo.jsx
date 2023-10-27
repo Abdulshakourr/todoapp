@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "./Form";
 
 export default function Todo() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() =>{
+    const storeTodos = JSON.parse(window.localStorage.getItem("todos") || "[]")
+  });
   const completedTodo = todos.filter((todo) => todo.done).length;
+  useEffect(() =>{
+   window.localStorage.setItem("todos" , JSON.stringify(todos))
+  },[todos])
   return (
     <>
       <section className="bg-white flex shadow mb-10">
